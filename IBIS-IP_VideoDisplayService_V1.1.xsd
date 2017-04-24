@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- Mit Notepad++ 6.7.5 von Angelika Tobisch (DResearch Fahrzeugelektronik GmbH) erstellt -->
+<!-- Mit Notepad++ 6.8 von Peter Schuessler (DResearch Fahrzeugelektronik GmbH) bearbeitet, Video Services Documents v0.5, 29.12.2016 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="IBIS-IP_common_V1.1.xsd"/>
+	<xs:include schemaLocation="IBIS-IP_Enumerations_V1.1.xsd"/>
+	<!--==== Service Definitions ====-->
+	<!--++ ListViewCapabilities ++-->
+	<xs:complexType name="VideoDisplayService.ListViewCapabilitiesResponseStructure">
+		<xs:choice>
+			<xs:element name="ViewID" type="IBIS-IP.int"/>
+			<xs:element name="ViewName" type="IBIS-IP.string"/>
+			<xs:element name="ViewType" type="VideoViewEnumeration"/>
+		</xs:choice>
+	</xs:complexType>
+	<!--++ SetVideoView ++-->
+	<xs:complexType name="VideoDisplayService.SetVideoViewRequestStructure">
+		<xs:choice>
+			<xs:element name="ViewID" type="IBIS-IP.int"/>
+			<xs:element name="Timeout" type="IBIS-IP.duration"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="VideoDisplayService.SetVideoViewResponseStructure">
+		<xs:choice>
+			<xs:element name="State" type="VideoDisplayStateEnumeration"/>
+			<xs:element name="CurrentViewID" type="IBIS-IP.int"/>
+			<xs:element name="OperationErrorMessage" type="IBIS-IP.string" minOccurs="0"/>
+		</xs:choice>
+	</xs:complexType>
+	<!--++ SetNextViewIndex ++-->
+	<xs:complexType name="VideoDisplayService.SetNextViewIndexResponseStructure">
+		<xs:choice>
+			<xs:element name="State" type="VideoDisplayStateEnumeration"/>
+			<xs:element name="OperationErrorMessage" type="IBIS-IP.string" minOccurs="0"/>
+		</xs:choice>
+	</xs:complexType>
+	<!--++ GetDisplayState ++-->
+	<xs:complexType name="VideoDisplayService.GetDisplayStateResponseStructure">
+		<xs:choice>
+			<xs:element name="State" type="VideoDisplayStateEnumeration"/>
+			<xs:element name="CurrentViewID" type="IBIS-IP.int"/>
+			<xs:element name="OperationErrorMessage" type="IBIS-IP.string" minOccurs="0"/>
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>

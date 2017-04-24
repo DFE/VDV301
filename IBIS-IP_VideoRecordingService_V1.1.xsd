@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- Mit Notepad++ 6.7.5 von Angelika Tobisch (DResearch Fahrzeugelektronik GmbH) erstellt -->
+<!-- Mit Notepad++ 6.8 von Peter Schuessler (DResearch Fahrzeugelektronik GmbH) bearbeitet, Video Services Documents v0.5, 29.12.2016 -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="IBIS-IP_common_V1.1.xsd"/>
+	<xs:include schemaLocation="IBIS-IP_Enumerations_V1.1.xsd"/>
+	<!--==== Service Definitions ====-->
+	<xs:complexType name="VideoRecordingService.PauseRRMRequestStructure">
+		<xs:choice>
+			<xs:element name="PauseInterval" type="IBIS-IP.int"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="VideoRecordingService.VideoRecordingStateStructure">
+		<xs:choice>
+			<xs:element name="State" type="VideoRecordingStateEnumeration"/>
+			<xs:element name="AlarmArchiveFillLevel" type="IBIS-IP.int"/>
+			<xs:element name="OperationErrorMessage" type="IBIS-IP.string"/>
+			<xs:element name="StartStopMode" type="RecordingSystemStartStopModeEnumeration"/>
+		</xs:choice>
+	</xs:complexType>
+</xs:schema>
