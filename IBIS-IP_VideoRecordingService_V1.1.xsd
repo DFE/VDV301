@@ -1,16 +1,66 @@
 <?xml version="1.0"?>
-<!-- Mit Notepad++ 6.7.5 von Angelika Tobisch (DResearch Fahrzeugelektronik GmbH) erstellt -->
-<!-- Mit Notepad++ 6.8 von Peter Schuessler (DResearch Fahrzeugelektronik GmbH) bearbeitet, Video Services Documents v0.5, 29.12.2016 -->
+<!-- DResearch VideoServices v1.1  naming according to VDV 301 v1.1, Dipl.-Ing (FH) Peter Schüßler, MBA (DResearch Fahrzeugelektronik GmbH), 2017-05-11 -->
+<!-- Include this XSD Scheme to use the IBIS-IP VideoService: VideoLiveService (request of information of all available video sources in the IBIS-IP system) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<!--==== Include of general IBIS-IP Version 1.1 XSD files ====-->
+	<!--==== If you want to use the video service with IBIS-IP Version 1.0 
+	         change the include of XSD files to version 1.0 -> IBIS-IP_common_V1.0.xsd and use IBIS IP v1.0 ====-->
 	<xs:include schemaLocation="IBIS-IP_common_V1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_Enumerations_V1.1.xsd"/>
+	
+	
+
+
+	<!--==== VideoRecordingService - Structures ====-->
+
+	<xs:element name="VideoRecordingService.StartRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+	<xs:element name="VideoRecordingService.StartRecordingERMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+	<xs:element name="VideoRecordingService.PauseRecordingRRMRequest" type="VideoRecordingService.PauseRecordingRRMRequestStruture"/>
+	<xs:element name="VideoRecordingService.PauseRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+	<xs:element name="VideoRecordingService.StopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+	<xs:element name="VideoRecordingService.ForceStopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+	<xs:element name="VideoRecordingService.GetVideoRecordingStateResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+	
+	<xs:group name="VideoRecordingServiceGroup">
+		<xs:sequence>
+				<xs:element name="VideoRecordingService.StartRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+				<xs:element name="VideoRecordingService.StartRecordingERMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+				<xs:element name="VideoRecordingService.PauseRecordingRRMRequest" type="VideoRecordingService.PauseRecordingRRMRequestStruture"/>
+				<xs:element name="VideoRecordingService.PauseRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+				<xs:element name="VideoRecordingService.StopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+				<xs:element name="VideoRecordingService.ForceStopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+				<xs:element name="VideoRecordingService.GetVideoRecordingStateResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
+		</xs:sequence>
+	</xs:group>
+
+	
+	<!--==== VideoRecordingService - Enumerations ====-->
+	<xs:simpleType name="VideoRecordingStateEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RRM"/>
+			<xs:enumeration value="ERM"/>
+			<xs:enumeration value="RRMFUT"/>
+			<xs:enumeration value="ERMFUT"/>
+			<xs:enumeration value="OFF"/>
+			<xs:enumeration value="PAUSE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RecordingSystemStartStopModeEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="IBIS-IP"/>
+			<xs:enumeration value="CVCU"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
 	<!--==== Service Definitions ====-->
-	<xs:complexType name="VideoRecordingService.PauseRRMRequestStructure">
+	<xs:complexType name="VideoRecordingService.PauseRecordingRRMRequestStruture">
 		<xs:choice>
 			<xs:element name="PauseInterval" type="IBIS-IP.int"/>
 		</xs:choice>
 	</xs:complexType>
-	<xs:complexType name="VideoRecordingService.VideoRecordingStateStructure">
+	<xs:complexType name="VideoRecordingService.VideoRecordingStateResponseStructure">
 		<xs:choice>
 			<xs:element name="State" type="VideoRecordingStateEnumeration"/>
 			<xs:element name="AlarmArchiveFillLevel" type="IBIS-IP.int"/>

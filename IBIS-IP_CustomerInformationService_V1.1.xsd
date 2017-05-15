@@ -34,10 +34,20 @@
 			</xs:element>
 			<xs:element name="MovingDirectionForward" type="IBIS-IP.boolean" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Gives Information, if the vehicle is moving forward, default value is "true"</xs:documentation>
+					<xs:documentation>Gives information, if the vehicle is moving forward, default value is "true"</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="VehicleMode" type="VehicleModeEnumeration" minOccurs="0"/>
+			<xs:element name="SpeakerActive" type="IBIS-IP.boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gives information, if the loud speaker is activated for a passenger announcement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StopInformationActive" type="IBIS-IP.boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Gives information, if the stopInformation inside the vehicle is in active or in passiv state (intentionally, e.g. due to "route left)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:group>
 	<!--==== GetOperation Definitions ====-->
@@ -85,7 +95,7 @@
 	<xs:complexType name="CustomerInformationService.CurrentConnectionInformationData">
 		<xs:sequence>
 			<xs:element name="TimeStamp" type="IBIS-IP.dateTime"/>
-			<xs:element name="CurrentConnection" type="ConnectionStructure"/>
+			<xs:element name="CurrentConnection" type="ConnectionStructure" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<!--++ CurrentDisplayContent ++-->

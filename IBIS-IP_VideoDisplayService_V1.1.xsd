@@ -1,10 +1,59 @@
 <?xml version="1.0"?>
-<!-- Mit Notepad++ 6.7.5 von Angelika Tobisch (DResearch Fahrzeugelektronik GmbH) erstellt -->
-<!-- Mit Notepad++ 6.8 von Peter Schuessler (DResearch Fahrzeugelektronik GmbH) bearbeitet, Video Services Documents v0.5, 29.12.2016 -->
+<!-- DResearch VideoServices v1.1  naming according to VDV 301 v1.1, Dipl.-Ing (FH) Peter Schüßler, MBA (DResearch Fahrzeugelektronik GmbH), 2017-05-11 -->
+<!-- Include this XSD Scheme to use the IBIS-IP VideoServices -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<!--==== Include of general IBIS-IP Version 1.1 XSD files ====-->
+	<!--==== If you want to use the video service with IBIS-IP Version 1.0 
+	         change the include of XSD files to version 1.0 -> IBIS-IP_common_V1.0.xsd and use IBIS IP v1.0 ====-->
 	<xs:include schemaLocation="IBIS-IP_common_V1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_Enumerations_V1.1.xsd"/>
-	<!--==== Service Definitions ====-->
+	
+	
+	<!--==== VideoDisplayService - Structures ====-->
+	<xs:element name="VideoDisplayService.ListViewCapabilitiesResponse" type="VideoDisplayService.ListViewCapabilitiesResponseStructure"/>
+	<xs:element name="VideoDisplayService.SetVideoViewRequest" type="VideoDisplayService.SetVideoViewRequestStructure"/>
+	<xs:element name="VideoDisplayService.SetVideoViewResponse" type="VideoDisplayService.SetVideoViewResponseStructure"/>
+	<xs:element name="VideoDisplayService.SetNextViewIndexResponse" type="VideoDisplayService.SetNextViewIndexResponseStructure"/>
+	<xs:element name="VideoDisplayService.GetDisplayStateResponse" type="VideoDisplayService.GetDisplayStateResponseStructure"/>
+	<xs:group name="VideoDisplayServiceGroup">
+		<xs:sequence>
+			<xs:element name="VideoDisplayService.ListViewCapabilitiesResponse" type="VideoDisplayService.ListViewCapabilitiesResponseStructure"/>
+			<xs:element name="VideoDisplayService.SetVideoViewRequest" type="VideoDisplayService.SetVideoViewRequestStructure"/>
+			<xs:element name="VideoDisplayService.SetVideoViewResponse" type="VideoDisplayService.SetVideoViewResponseStructure"/>
+			<xs:element name="VideoDisplayService.SetNextViewIndexResponse" type="VideoDisplayService.SetNextViewIndexResponseStructure"/>
+			<xs:element name="VideoDisplayService.GetDisplayStateResponse" type="VideoDisplayService.GetDisplayStateResponseStructure"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<!--==== VideoDisplayService - Enumerations ====-->
+	<xs:simpleType name="VideoViewEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Single"/>
+			<xs:enumeration value="Dual"/>
+			<xs:enumeration value="Quad"/>
+			<xs:enumeration value="1plus5"/>
+			<xs:enumeration value="1plus7"/>
+			<xs:enumeration value="Nona"/>
+			<xs:enumeration value="Black"/>
+			<xs:enumeration value="Sequence"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="VideoDisplayStateEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="On"/>
+			<xs:enumeration value="Off"/>
+			<xs:enumeration value="InvalidViewID"/>
+			<xs:enumeration value="InvalidOperation"/>
+			<xs:enumeration value="NetworkError"/>
+			<xs:enumeration value="NoSync"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<!--==== VideoDisplayService - Service functions ====-->
+	
 	<!--++ ListViewCapabilities ++-->
 	<xs:complexType name="VideoDisplayService.ListViewCapabilitiesResponseStructure">
 		<xs:choice>

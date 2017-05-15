@@ -1,10 +1,46 @@
 <?xml version="1.0"?>
-<!-- Mit Notepad++ 6.7.5 von Angelika Tobisch (DResearch Fahrzeugelektronik GmbH) erstellt -->
-<!-- Mit Notepad++ 6.8 von Peter Schuessler (DResearch Fahrzeugelektronik GmbH) bearbeitet, Video Services Documents v0.5, 29.12.2016 -->
+<!-- DResearch VideoServices v1.1  naming according to VDV 301 v1.1, Dipl.-Ing (FH) Peter Schüßler, MBA (DResearch Fahrzeugelektronik GmbH), 2017-05-11 -->
+<!-- Include this XSD Scheme to use the IBIS-IP VideoService: VideoLiveService (request of information of all available video sources in the IBIS-IP system) -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<!--==== Include of general IBIS-IP Version 1.1 XSD files ====-->
+	<!--==== If you want to use the video service with IBIS-IP Version 1.0 
+	         change the include of XSD files to version 1.0 -> IBIS-IP_common_V1.0.xsd and use IBIS IP v1.0 ====-->
 	<xs:include schemaLocation="IBIS-IP_common_V1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_Enumerations_V1.1.xsd"/>
-	<!--==== Service Definitions ====-->
+	
+	<!--==== VideoLiveService - Structures ====-->
+	<xs:element name="VideoLiveService.ListAllLiveStreamsResponse" type="VideoLiveService.ListAllLiveStreamsResponseStructure"/>
+	<xs:group name="VideoLiveServiceGroup">
+		<xs:sequence>
+			<xs:element name="VideoLiveService.ListAllLiveStreamsResponse" type="VideoLiveService.ListAllLiveStreamsResponseStructure"/>
+		</xs:sequence>
+	</xs:group>
+	
+	
+	
+	<!--==== VideoLiveService - Enumerations ====-->
+	<xs:simpleType name="VideoSourceCurrentStateEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Connected"/>
+			<xs:enumeration value="NoSync"/>
+			<xs:enumeration value="NoETHConnection"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="VideoCodecEnumeration">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MJPEG"/>
+			<xs:enumeration value="MPEG4"/>
+			<xs:enumeration value="H264"/>
+			<xs:enumeration value="H265"/>
+			<xs:enumeration value="unknown"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	
+	<!--==== VideoLiveService - Service functions ====-->
+	
 	<!--++ ListAllLiveStreams ++-->
 	<xs:complexType name="VideoLiveService.ListAllLiveStreamsResponseStructure">
 		<xs:choice>
@@ -18,7 +54,7 @@
 			<xs:element name="CameraName" type="IBIS-IP.string"/>
 			<xs:element name="CameraType" type="IBIS-IP.string"/>
 			<xs:element name="CameraCurrentState" type="VideoSourceCurrentStateEnumeration"/>
-			<xs:element name="rtspURI" type="IBIS-IP.anyURI/">
+			<xs:element name="rtspURI" type="IBIS-IP.anyURI"/>
 			<xs:element name="VideoWidth" type="IBIS-IP.int"/>
 			<xs:element name="VideoHeight" type="IBIS-IP.int"/>
 			<xs:element name="VideoCodec" type="VideoCodecEnumeration"/>
@@ -30,4 +66,5 @@
 			<xs:element name="Quality" type="IBIS-IP.int" />
 		</xs:choice>
 	</xs:complexType>
+	
 </xs:schema>

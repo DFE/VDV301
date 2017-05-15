@@ -164,7 +164,7 @@
 					<xs:documentation>Describes the kind of connection </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="DisplayContent" type="DisplayContentStructure">
+			<xs:element name="DisplayContent" type="DisplayContentStructure" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Structure for desccribing the information which is shown on a head- or sidesign</xs:documentation>
 				</xs:annotation>
@@ -186,7 +186,12 @@
 			</xs:element>
 			<xs:element name="ExpectedDepartureTime" type="IBIS-IP.dateTime" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Information, at which time the leaving vehicle will depart</xs:documentation>
+					<xs:documentation>Information, at which time the leaving vehicle will depart based on realtime information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ScheduledDepartureTime" type="IBIS-IP.dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Information, at which time the leaving vehicle is planned to depart</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -628,10 +633,15 @@ farezone</xs:documentation>
             		</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="AdditionalTextMessage" type="IBIS-IP.string" minOccurs="0"/>
+			<xs:element name="AdditionalTextMessage" type="InternationalTextType" minOccurs="0"/>
 			<xs:element name="AdditionalAnnouncement" type="AdditionalAnnouncementStructure" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>not StopPointAnnouncements; additional announcements; e.g. of the operator or dispatcher</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RouteDirection" type="RouteDirectionEnumeration" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The direction of the route, 1->forward 2->backwards and  0->UNDEFINED </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

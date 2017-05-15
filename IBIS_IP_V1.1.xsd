@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Mit XMLSpy v2012 rel. 2 sp1 (http://www.altova.com) von Dirk Weißer (INIT GmbH) bearbeitet -->
+<!-- last edit: Peter Schüßler (DResearch), add of video services -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.example.org/IP-KOM" elementFormDefault="qualified">
 	<xs:include schemaLocation="IBIS-IP_common_V1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_Enumerations_V1.1.xsd"/>
@@ -9,12 +10,19 @@
 	<xs:include schemaLocation="IBIS-IP_LocationService_V1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_NetworkLocationService_V1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_SystemManagementService_V1.1.xsd"/>
-	<xs:include schemaLocation="IBIS-IP_SystemDocumentationService_V1.1.xsd"/>
+	<xs:include schemaLocation="IBIS-IP_SystemDocumentationService_v1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_TicketInformationService_V1.1.xsd"/>
 	<xs:include schemaLocation="IBIS-IP_PassengerCountingService_V1.1.xsd"/>
-	<xs:include schemaLocation="IBIS-IP_VideoDisplayService_V1.1.xsd"/>
-	<xs:include schemaLocation="IBIS-IP_VideoLiveService_V1.1.xsd"/>
-	<xs:include schemaLocation="IBIS-IP_VideoRecordingService_V1.1.xsd"/>
+	<!--==== VideoServices ====-->
+	<!--==== in IBIS-IP Version 1.1 the new VideoServices are available  ====-->
+	<!--==== To use a VideoServices include the corresponding XSD scheme directly in the source code of your implementation ====-->
+	<!--==== To provide a higher level of flexibility the XSD schemes of videoservices in cluding declarations of operations as well as enumeration are defined in the service specific XSD ====-->
+	
+	<!--==== VideoLiveService:      IBIS-IP_VideoLiveService_V1.1.xsd ====-->
+	<!--==== VideoDisplayService:   IBIS-IP_VideoDisplayService_V1.1.xsd ====-->
+	<!--==== VideoRecordingService: IBIS-IP_VideoRecordingService_V1.1.xsd ====-->
+	
+	
 	<!--==== CustomerInformationService ====-->
 	<xs:element name="CustomerInformationService.GetAllDataResponse" type="CustomerInformationService.GetAllDataResponseStructure"/>
 	<xs:element name="CustomerInformationService.GetCurrentAnnouncementResponse" type="CustomerInformationService.GetCurrentAnnouncementResponseStructure"/>
@@ -190,55 +198,6 @@
 			<xs:element name="PassengerCountingService.SetCounterDataRequest" type="PassengerCountingService.SetCounterDataRequestStructure"/>
 		</xs:sequence>
 	</xs:group>
-
-<!--==== BEGIN of adaptions by DResearch  ====-->
-
-<!-- Mit Notepad++ 6.7.5 von Angelika Tobisch (DResearch Fahrzeugelektronik GmbH) bearbeitet -->
-<!-- Mit Notepad++ 6.8 von Peter Schuessler (DResearch Fahrzeugelektronik GmbH) bearbeitet, Video Services Documents v0.5 -->
-	<!--==== VideoDisplayService v0.5 vom 28.12.2016 ====-->
-	<xs:element name="VideoDisplayService.ListViewCapabilitiesResponse" type="VideoDisplayService.ListViewCapabilitiesResponseStructure"/>
-	<xs:element name="VideoDisplayService.SetVideoViewRequest" type="VideoDisplayService.SetVideoViewRequestStructure"/>
-	<xs:element name="VideoDisplayService.SetVideoViewResponse" type="VideoDisplayService.SetVideoViewResponseStructure"/>
-	<xs:element name="VideoDisplayService.SetNextViewIndexResponse" type="VideoDisplayService.SetNextViewIndexResponseStructure"/>
-	<xs:element name="VideoDisplayService.GetDisplayStateResponse" type="VideoDisplayService.GetDisplayStateResponseStructure"/>
-	<xs:group name="VideoDisplayServiceGroup">
-		<xs:sequence>
-			<xs:element name="VideoDisplayService.ListViewCapabilitiesResponse" type="VideoDisplayService.ListViewCapabilitiesResponseStructure"/>
-			<xs:element name="VideoDisplayService.SetVideoViewRequest" type="VideoDisplayService.SetVideoViewRequestStructure"/>
-			<xs:element name="VideoDisplayService.SetVideoViewResponse" type="VideoDisplayService.SetVideoViewResponseStructure"/>
-			<xs:element name="VideoDisplayService.SetNextViewIndexResponse" type="VideoDisplayService.SetNextViewIndexResponseStructure"/>
-			<xs:element name="VideoDisplayService.GetDisplayStateResponse" type="VideoDisplayService.GetDisplayStateResponseStructure"/>
-		</xs:sequence>
-	</xs:group>
-	<!--==== VideoLiveService v0.5 vom 28.12.2016 ====-->
-	<xs:element name="VideoLiveService.ListAllLiveStreamsResponse" type="VideoLiveService.ListAllLiveStreamsResponseStructure"/>
-	<xs:group name="VideoLiveServiceGroup">
-		<xs:sequence>
-			<xs:element name="VideoLiveService.ListAllLiveStreamsResponse" type="VideoLiveService.ListAllLiveStreamsResponseStructure"/>
-		</xs:sequence>
-	</xs:group>
-	<!--==== VideoRecordingService v0.5 vom 28.12.2016 ====-->
-	<xs:element name="VideoRecordingService.StartRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-	<xs:element name="VideoRecordingService.StartRecordingERMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-	<xs:element name="VideoRecordingService.PauseRecordingRRMRequest" type="VideoRecordingService.PauseRecordingRRMRequestStruture"/>
-	<xs:element name="VideoRecordingService.PauseRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-	<xs:element name="VideoRecordingService.StopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-	<xs:element name="VideoRecordingService.ForceStopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-	<xs:element name="VideoRecordingService.GetVideoRecordingStateResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-	<xs:group name="VideoRecordingServiceGroup">
-		<xs:sequence>
-				<xs:element name="VideoRecordingService.StartRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-				<xs:element name="VideoRecordingService.StartRecordingERMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-				<xs:element name="VideoRecordingService.PauseRecordingRRMRequest" type="VideoRecordingService.PauseRecordingRRMRequestStruture"/>
-				<xs:element name="VideoRecordingService.PauseRecordingRRMResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-				<xs:element name="VideoRecordingService.StopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-				<xs:element name="VideoRecordingService.ForceStopRecordingResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-				<xs:element name="VideoRecordingService.GetVideoRecordingStateResponse" type="VideoRecordingService.VideoRecordingStateResponseStructure"/>
-		</xs:sequence>
-	</xs:group>
-
-<!--==== END of adaptions by DResearch  ====-->
-
 	<!--==== GeneralOperations ====-->
 	<xs:group name="SubscriptionResponseGroup">
 		<xs:choice>
